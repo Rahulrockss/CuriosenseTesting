@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault()
     setLoggedInState("logging in")
     console.log(values)
-    axios.post("http://localhost:8000/curiosense/login",values)
+    axios.post("https://curiosensetestingserver.onrender.com/login",values)
      .then(res=>{
      
       if(res.data.success){
