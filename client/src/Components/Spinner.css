@@ -1,0 +1,14 @@
+.loader-container {
+    position: relative;
+    width: 30%;
+    height: 30%;
+  }
+  
+  .loader-svg {
+    position: absolute;
+    align-items: center;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+  }
+  

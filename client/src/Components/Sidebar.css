@@ -1,0 +1,39 @@
+*{
+    box-sizing: border-box;
+}
+
+.sidebar {
+    margin-top: 25%;
+}
+
+.sidebar-item {
+
+    width: auto;
+    padding: 10px 30px;
+}
+.sidebar-link{
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+.top-icon{
+    font-size: 30px;
+}
+.icon{
+    margin-right: 10px;
+
+}
+.active{
+    background: rgb(232, 26, 34);
+    background: linear-gradient(
+      123deg,
+      rgba(232, 26, 34, 0.8) 15%,
+      rgba(49, 64, 136, 0.8) 100%
+    );
+}
+.active .sidebar-link{
+    color: white;
+}

@@ -1,0 +1,10 @@
+.contact-list{
+    display: flex;
+    justify-content: space-around;
+}
+.title{
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    margin-top: 15px;
+}
