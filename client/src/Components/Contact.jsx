@@ -11,7 +11,7 @@ const Contact = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    axios.get("https://curiosensetestingserver.onrender.com/curiosense/contacts", {
+    axios.get("https://curiosensetestingsserver.onrender.com/contacts", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

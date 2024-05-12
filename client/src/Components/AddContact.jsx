@@ -29,7 +29,7 @@ const AddContact = () => {
   }
   const handleSubmit = (e)=>{
     e.preventDefault()
-    axios.post("https://curiosensetestingserver.onrender.com/curiosense/add-contact",values,{
+    axios.post("https://curiosensetestingsserver.onrender.com/add-contact",values,{
         headers:{
           Authorization:`Berear ${localStorage.getItem('token')}`
         }
