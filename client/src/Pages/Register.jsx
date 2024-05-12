@@ -29,7 +29,7 @@ const Register = () => {
     // const errs = Validation(values)
     // setErrors(errs)
     // if(errs.name===""&& errs.email===""&& errs.password===""){
-    axios.post("https://curiosensetestingsserver.onrender.com/register",values)
+    axios.post("https://curiosensetestingsserver.onrender.com/curiosense/register",values)
      .then(res=>{
       if(res.data.success){
         toast.success("Account Created Succesfully",{
