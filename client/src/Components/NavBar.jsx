@@ -102,7 +102,7 @@ const NavBar = () => {
               <Link to='/dashboard' onClick={toggleNavbar}>
                 Dashboard
               </Link>
-              <Link to='/logout' onClick={handleLogout}>
+              <Link to='/logout'>
                 LogOut
               </Link>
             </>
