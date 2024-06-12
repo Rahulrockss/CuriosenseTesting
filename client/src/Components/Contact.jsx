@@ -37,21 +37,23 @@ const Contact = () => {
       <div className="title">My Games</div>
       <div className="contact-list">
         {contacts.map(contact => (
-          <CCard key={contact._id} style={{ width: '18rem', marginBottom: '20px' }}>
-            <CCardImage orientation="top" src={contact.image} alt={contact.gametitle} />
+          <CCard key={contact._id} className="contact-card">
+            <CCardImage orientation="top" src={contact.image} alt={contact.gametitle} className="contact-image" />
             <CCardBody>
-              <CCardTitle>{contact.gametitle}</CCardTitle>
-              <CCardText>
-                Game Category: {contact.category}
+              <CCardTitle className="contact-title">{contact.gametitle}</CCardTitle>
+              <CCardText className="contact-text">
+                <span className="contact-category">Game Category:</span> {contact.category}
                 <br/>
-                How To Play: {contact.howtoplay}
+                <span className="contact-howtoplay">How To Play:</span> {contact.howtoplay}
                 <br/>
-                <a href={contact.url}>Watch Video</a>
+                <a href={contact.url} className="contact-url">Watch Video</a>
               </CCardText>
-              <Link to={`/edit-contact/${contact._id}`}>
-                <CButton color="primary">Edit</CButton>
-              </Link>
-              <CButton color="danger" onClick={() => handleDelete(contact._id)}>Delete</CButton>
+              <div className="contact-buttons">
+                <Link to={`/edit-contact/${contact._id}`}>
+                  <CButton color="primary" className="contact-button">Edit</CButton>
+                </Link>
+                <CButton color="danger" className="contact-button" onClick={() => handleDelete(contact._id)}>Delete</CButton>
+              </div>
             </CCardBody>
           </CCard>
         ))}

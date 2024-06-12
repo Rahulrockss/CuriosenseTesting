@@ -1,10 +1,82 @@
-.contact-list{
+body {
+    background-color: #f4f4f9;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+  }
+  
+  .contact-list {
     display: flex;
-    justify-content: space-around;
-}
-.title{
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    font-size: large;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .contact-card {
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contact-image {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .contact-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .contact-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .contact-category,
+  .contact-howtoplay {
+    font-weight: bold;
+  }
+  
+  .contact-url {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-url:hover {
+    text-decoration: underline;
+  }
+  
+  .contact-buttons {
+    display: flex;
+    justify-content: space-between;
     margin-top: 15px;
-}
+  }
+  
+  .contact-button {
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .contact-button:hover {
+    background-color: #0056b3;
+  }
+  
