@@ -112,7 +112,7 @@ const AddContact = () => {
 
   return (
     <>
-      <NavBar/>
+      
       <div className="register-container">
         <div className="register-box">
           <form onSubmit={handleSubmit}>
@@ -129,12 +129,13 @@ const AddContact = () => {
               />
             </div>
             {imagePreview && <img className="image-preview" src={imagePreview} alt="Preview" />}
+            <h5 style={{color:'black',justifyContent:'left'}}>Upload Image</h5>
             <div className="input-group">
-              <input
+              <input 
                 type="file"
                 name="image"
                 onChange={imageChange}
-                placeholder="Upload Image"
+                placeholder="Image"
                 required
               />
             </div>
@@ -278,7 +279,7 @@ const AddContact = () => {
           </form>
         </div>
       </div>
-      <Footer/>
+    
     </>
   );
 }

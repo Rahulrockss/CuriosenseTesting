@@ -1,12 +1,12 @@
-/* Navbar.css */
+/* NavBar.css */
 
 .navbar {
-  /* background-color: var(--main-color-first); */
   background-color: #ffffff;
   padding: 10px 20px;
   color: #000;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  height: 80px;  
 }
 
 .navbar-container {
@@ -21,25 +21,29 @@
 }
 
 .navbar-logo img {
-  width: 20rem;
+  margin-left: auto;
+  width: 350px;
+  height:50px;
 }
 
 .navbar-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  width: 50%;
+  flex-grow: 1;
 }
 
 .navbar-links a {
-  color: var(--text-color);
+  color: #333;
   text-decoration: none;
-  padding: 10px;
+  padding: 10px 15px;
   transition: 0.2s all ease-in-out;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 .navbar-links a:hover {
-  color: var(--main-color-second);
+  background-color: rgba(232, 26, 34, 0.1);
 }
 
 .navbar-toggle {
@@ -54,6 +58,24 @@
   background-color: #000000;
   margin: 3px 0;
   display: block;
+}
+
+.navbar-button {
+
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-left: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-button:hover {
+background-color: rgba(232, 26, 34, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -75,9 +97,7 @@
 
   .navbar-links a {
     color: white;
-  }
-  .navbar-links a:hover {
-    color: white;
+    padding: 15px;
   }
 
   .navbar-links.active {
@@ -87,7 +107,8 @@
   .navbar-toggle {
     display: flex;
   }
+
   .navbar-logo img {
-    width: 18.2rem;
+    width: 120px;
   }
 }

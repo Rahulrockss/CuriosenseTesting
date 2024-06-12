@@ -56,10 +56,6 @@ const router = createBrowserRouter([
     element:<Product/>
   },
   {
-    path:"/add-contact",
-    element:<AddContact/>
-  },
-  {
     path:"/edit-contact/:id",
     element:<EditContact/>
   },
@@ -71,8 +67,11 @@ const router = createBrowserRouter([
         index:true,
         element:<Contact/>
       },
-     
-
+      {
+        path: 'add-contact',
+        index:true,
+        element:<AddContact/>
+      }
     ]
   }
 ])
