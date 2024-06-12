@@ -64,6 +64,7 @@ const router = createBrowserRouter([
     element:<Dashboard/>,
     children:[
       {
+        path:'game-details',
         index:true,
         element:<Contact/>
       },
