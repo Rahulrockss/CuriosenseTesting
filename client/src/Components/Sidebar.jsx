@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import {
   FaCubesStacked,
   FaUser,
-  FaAddressBook,
-  FaRegAddressBook,
   FaPowerOff,
   FaAddressCard,
 } from 'react-icons/fa6';
