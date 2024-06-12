@@ -9,7 +9,7 @@ const Contact = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    axios.get("https://curiosensetestingsserver.onrender.com/curiosense/add-contact/curiosense/contacts", {
+    axios.get("https://curiosensetestingsserver.onrender.com/curiosense/contacts", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
