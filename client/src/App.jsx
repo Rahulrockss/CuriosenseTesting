@@ -17,6 +17,8 @@ import AboutUs from './Pages/AboutUs'
 import Product from './Pages/Product'
 import EditContact from './Components/EditContact'
 import Logout from './Components/Logout'
+import ProtectedRoutes from './Components/ProtectedRoutes'
+import NotFound from './Pages/NotFound'
 
 
 
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
     element:<Logout/>
   },
   {
+    path:"*",
+    element:<NotFound/>
+  },
+  {
     path:'/team',
     element:<Teams/>
   },
@@ -61,7 +67,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<Dashboard/>,
+    element:<ProtectedRoutes><Dashboard/></ProtectedRoutes>,
     children:[
       {
         path:'game-details',
@@ -72,6 +78,10 @@ const router = createBrowserRouter([
         path: 'add-contact',
         index:true,
         element:<AddContact/>
+      },
+      {
+        path: '/dashboard/edit-contact/:id',
+        element:<EditContact/>
       }
     ]
   }

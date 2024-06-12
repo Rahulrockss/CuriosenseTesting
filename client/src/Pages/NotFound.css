@@ -1,0 +1,102 @@
+/* body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  } */
+  
+  .not-found-container {
+    text-align: center;
+    position: relative;
+    z-index: 0;
+  }
+  
+  .error-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 0;
+  }
+  
+  .error-code {
+    font-size: 10rem;
+    font-weight: 900;
+    color: #ff6f61;
+    margin: 0;
+  }
+  
+  .error-message {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+  
+  .error-description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .home-link {
+    text-decoration: none;
+    background-color: #ff6f61;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .home-link:hover {
+    background-color: #ff4757;
+  }
+  
+  .animation-section {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  /* .planet {
+    width: 10px;
+    height: 10px;
+    background-color: #0f3460;
+    border-radius: 50%;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  }
+   */
+  .astronaut {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .astronaut img {
+    width: 100%;
+    height: auto;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  

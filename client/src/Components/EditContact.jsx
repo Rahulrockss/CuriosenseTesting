@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from "../App"
-import "./Register.css"
-import {toast}  from 'react-toastify'
-import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react';
+import { UserContext } from "../App";
+import "./Register.css";
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import NavBar from '../Components/NavBar.jsx'
-// import {FaAt,FaAddressBook,FaPhoneFlip,FaUserPlus} from 'react-icons/fa6'
+import NavBar from '../Components/NavBar.jsx';
+import Footer from './Footer.jsx';
 
 const EditContact = () => {
-  const {user} = useContext(UserContext)
-  const [values,setValues] = useState({
+  const { user } = useContext(UserContext);
+  const [formFields, setFormFields] = useState({
     gametitle: "",
     age: "",
     gender: "",
@@ -22,76 +22,148 @@ const EditContact = () => {
     url: "",
     score: "",
     level: "",
-  })
-  const navigate = useNavigate()
-  const handleInput = (event)=>{
-    setValues({...values, [event.target.name]:event.target.value})
-  }
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    axios.post("https://curiosensetestingserver.onrender.com/curiosense/add-contact",values,{
-        headers:{
-          Authorization:`Berear ${localStorage.getItem('token')}`
-        }
-      })
-     .then(res=>{
-      if(res.data.success){
-        toast.success("Contact Created Succesfully",{
-          position:"top-center",
-          autoClose:3000
-        })
-        navigate('/dashboard')
-      }
-     }).catch(err=> {
-       console.log(err)
+  });
+  const { 
+    gametitle,
+    age,
+    gender,
+    category,
+    subcategory,
+    howtoplay,
+    benefitsofplaying,
+    itemsrequied,
+    url,
+    score,
+    level
+  } = formFields;
 
-     })
-    
-  }
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageLoad, setImageLoad] = useState(false);
+  const navigate = useNavigate();
   const {id} = useParams()
-  useEffect(() => {
-    
-    axios.get("http://localhost:8000/curiosense/contacts/"+id, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+  const handleInput = (e) => {
+    setFormFields((prevValue) => ({
+      ...prevValue,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const imageChange = (e) => {
+    const file = e.target.files[0];
+    setImagePreview(URL.createObjectURL(file));
+    setImage(file);
+  };
+  
+  const uploadImage = async () => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'images_preset');
+    try {
+      setImageLoad(true);
+      let response = await fetch('https://api.cloudinary.com/v1_1/dmfxfh66l/image/upload', {
+        method: 'POST',
+        body: data,
+      });
+      let urlData = await response.json();
+      setImageLoad(false);
+      return urlData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const uploadedImage = await uploadImage();
+    const userData = {
+      gametitle,
+      image: uploadedImage ? uploadedImage.url : imagePreview,
+      age,
+      gender,
+      category,
+      subcategory,
+      howtoplay,
+      benefitsofplaying,
+      itemsrequied,
+      url,
+      score,
+      level,
+    };
+    try {
+      const response = await axios.put("https://curiosensetestingsserver.onrender.com/curiosense/update-contact/"+id, userData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.data.success) {
+        toast.success("Game Updated Successfully", {
+          position: "top-center",
+          autoClose: 3000
+        });
+        navigate('/dashboard/game-details');
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  console.log(id);
+  useEffect(()=>{
+    axios.get("https://curiosensetestingsserver.onrender.com/curiosense/contact/"+id, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
     .then(res => {
       if (res.data.success) {
-      setValues({
-        gametitle: res.data.gametitle,
-        age: res.data.age,
-        gender: res.data.gender,
-        category: res.data.category,
-        subcategory: res.data.subcategory,
-        howtoplay: res.data.howtoplay,
-        benefitsofplaying: res.data.benefitsofplaying,
-        itemsrequied: res.data.itemsrequied,
-        url: res.data.url,
-        score: res.data.score,
-        level: res.data.level,
-      })
+        setFormFields({
+          gametitle: res.data.gametitle,
+          image:res.data.image,
+          age: res.data.age,
+          gender: res.data.gender,
+          category: res.data.category,
+          subcategory: res.data.subcategory,
+          howtoplay: res.data.howtoplay,
+          benefitsofplaying: res.data.benefitsofplaying,
+          itemsrequied: res.data.itemsrequied,
+          url: res.data.url,
+          score: res.data.score,
+          level: res.data.level,
+        })
       }
     })
     .catch(err => {
       console.log(err);
     });
-  }, []);
+  },[])
+
   return (
-    <> 
-      <div className="login-container signup-container">
-        <div className="login-box signup-box">
+    <>
+      <div className="register-container">
+        <div className="register-box">
           <form onSubmit={handleSubmit}>
-            <h2>Edit a New Physical Game</h2>
+            <h2>Edit Physical Game</h2>
 
             <div className="input-group">
               <input
                 type="text"
                 name="gametitle"
-                // value={values.gametitle}
                 onChange={handleInput}
-                placeholder="Game Title*"
-                value={values.gametitle}
+                placeholder="Game Title"
+                value={formFields.gametitle}
+                required
+              />
+            </div>
+            {imagePreview && <img className="image-preview" src={imagePreview} alt="Preview" />}
+            <h5 style={{color:'black',justifyContent:'left'}}>Upload Image</h5>
+            <div className="input-group">
+              <input 
+                type="file"
+                name="image"
+                onChange={imageChange}
+                placeholder="Image"
                 required
               />
             </div>
@@ -100,10 +172,9 @@ const EditContact = () => {
               <input
                 type="number"
                 name="age"
-                // value={values.age}
+                value={formFields.age}
                 onChange={handleInput}
                 placeholder="Suitable Age Group*"
-                value={values.age}
                 required
               />
             </div>
@@ -112,11 +183,11 @@ const EditContact = () => {
               <select
                 id="Gender"
                 name="gender"
-                value={values.gender}
+                value={formFields.gender}
                 onChange={handleInput}
                 required
               >
-                <option disabled selected Value="default">
+                <option disabled value="">
                   -- Suitable for Gender* --
                 </option>
                 <option value="Male">Male</option>
@@ -128,23 +199,17 @@ const EditContact = () => {
               <select
                 id="category"
                 name="category"
-                // value={values.category}
+                value={formFields.category}
                 onChange={handleInput}
                 required
               >
-                <option disabled selected Value="default">
+                <option disabled value="">
                   -- Category* --
                 </option>
                 <option value="Academic Lessons">Academic Lessons</option>
-                <option value="Behavior Development">
-                  Behavior Development
-                </option>
-                <option value="Cognition Development">
-                  Cognition Development
-                </option>
-                <option value="Motor Skill Development">
-                  Motor Skill Development
-                </option>
+                <option value="Behavior Development">Behavior Development</option>
+                <option value="Cognition Development">Cognition Development</option>
+                <option value="Motor Skill Development">Motor Skill Development</option>
                 <option value="Others">Others</option>
               </select>
             </div>
@@ -152,26 +217,24 @@ const EditContact = () => {
               <select
                 id="subcategory"
                 name="subcategory"
-                // value={values.subcategory}
+                value={formFields.subcategory}
                 onChange={handleInput}
                 required
               >
-                <option disabled selected Value="default">
+                <option disabled value="">
                   -- Sub Category* --
                 </option>
                 <option value="Memory Enhancement">Memory Enhancement</option>
                 <option value="Fine Motor Skill">Fine Motor Skill</option>
-                <option value="Academic Lessons Title">
-                  Academic Lessons Title
-                </option>
+                <option value="Academic Lessons Title">Academic Lessons Title</option>
               </select>
             </div>
 
             <div className="input-group">
               <textarea
-                id="Howtoplay"
+                id="howtoplay"
                 name="howtoplay"
-                // value={values.howtoplay}
+                value={formFields.howtoplay}
                 onChange={handleInput}
                 required
                 placeholder="How to Play the Game (in 100 words).*"
@@ -182,7 +245,7 @@ const EditContact = () => {
               <textarea
                 id="benefitsofplaying"
                 name="benefitsofplaying"
-                // value={values.benefitsofplaying}
+                value={formFields.benefitsofplaying}
                 onChange={handleInput}
                 required
                 placeholder="Benefits of Playing this Game for holistic development (in 50 words)*"
@@ -193,7 +256,7 @@ const EditContact = () => {
               <textarea
                 id="itemsrequied"
                 name="itemsrequied"
-                // value={values.itemsrequied}
+                value={formFields.itemsrequied}
                 onChange={handleInput}
                 required
                 placeholder="Items required to play this game.*"
@@ -204,7 +267,7 @@ const EditContact = () => {
               <input
                 type="text"
                 name="url"
-                // value={values.url}
+                value={formFields.url}
                 onChange={handleInput}
                 placeholder="Video URL*"
                 required
@@ -215,7 +278,7 @@ const EditContact = () => {
               <input
                 type="text"
                 name="score"
-                // value={values.score}
+                value={formFields.score}
                 onChange={handleInput}
                 placeholder="Provide Scoring Pattern"
               />
@@ -225,28 +288,28 @@ const EditContact = () => {
               <input
                 type="text"
                 name="level"
-                // value={values.level}
+                value={formFields.level}
                 onChange={handleInput}
                 placeholder="Provide Number of levels"
               />
             </div>
 
-           
-
-            <button type="submit" className="login-btn">
+            <button type="submit" className="submit-btn">
               Update
             </button>
 
-            <div className="input-group">
+            <div className="note">
               <span>
-                Note : Please upload your video on google drive and make sure
+                Note: Please upload your video on google drive and make sure
                 your video is on public mode
               </span>
             </div>
           </form>
         </div>
       </div>
+    
     </>
-)
- }
-export default EditContact
+  );
+}
+
+export default EditContact;

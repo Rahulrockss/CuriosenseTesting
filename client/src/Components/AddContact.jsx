@@ -103,7 +103,7 @@ const AddContact = () => {
           position: "top-center",
           autoClose: 3000
         });
-        navigate('/dashboard');
+        navigate('/dashboard/game-details');
       }
     } catch (error) {
       console.log(error);
