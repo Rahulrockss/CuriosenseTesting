@@ -4,7 +4,9 @@ import { UserModel } from "../models/User.js";
 
 
 const createContact = async (req,res)=>{
-  const {gametitle,
+  const {
+    gametitle,
+    image,
     age,
     gender,
     category,
@@ -18,6 +20,7 @@ const createContact = async (req,res)=>{
   try{
   const newContact= new ContactModel({
     gametitle,
+    image,
     age,
     gender,
     category,

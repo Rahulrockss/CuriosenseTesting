@@ -6,6 +6,10 @@ const ContactSchema = new mongoose.Schema({
     require: true,
     unique: true,
   },
+  image:{
+    type:String,
+    require: true,
+  },
   age: {
     type: Number,
     require: true,
