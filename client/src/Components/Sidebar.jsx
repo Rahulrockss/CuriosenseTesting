@@ -25,7 +25,7 @@ const {user} = useContext(UserContext)
             <FaUser className="icon"/>{user?.name}</Link>
       </div>
       <div className={`sidebar-item ${activeLink===1 ?"active":""}`} onClick={()=>{setActiveLink(1)}}>
-        <Link to="/dashboard"className="sidebar-link">
+        <Link to="/dashboard/game-details"className="sidebar-link">
         <FaAddressCard className="icon"/>Game Details</Link>
       </div>
       <div className={`sidebar-item ${activeLink===2 ?"active":""}`} onClick={()=>{setActiveLink(2)}}>
